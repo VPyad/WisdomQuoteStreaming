@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import com.example.vpyad.wisdomquotestreaming.Models.Quote
 import kotlinx.android.synthetic.main.fragment_single_quote.*
 
@@ -22,6 +23,8 @@ class SingleQuoteFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         setQuote()
 
+        nextButton.setOnClickListener(nextButtonClickListener)
+
         super.onViewCreated(view, savedInstanceState)
     }
 
@@ -31,5 +34,17 @@ class SingleQuoteFragment : Fragment() {
         val quote = Quote(text, author, "")
 
         singleQuoteView.setQuote(quote)
+    }
+
+    val nextButtonClickListener = View.OnClickListener { view ->
+        when (view.id) {
+            R.id.nextButton -> showProgress()
+        }
+    }
+
+    private fun showProgress(){
+        progressBar.visibility = View.VISIBLE
+        //Thread.sleep(1500)
+        //progressBar.visibility = View.GONE
     }
 }

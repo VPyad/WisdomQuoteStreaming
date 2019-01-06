@@ -2,6 +2,7 @@
 <resources>
     <color name="colorPrimary">#090a0a</color>
     <color name="colorPrimaryDark">#000000</color>
+    <color name="streamRecyclerViewCell">#252323</color>
     <color name="colorAccent">#D81B60</color>
 
     <color name="mainTextForeground">#c9c1c4</color>

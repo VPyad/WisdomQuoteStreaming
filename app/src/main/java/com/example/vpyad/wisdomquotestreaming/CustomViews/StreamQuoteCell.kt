@@ -12,7 +12,7 @@ class StreamQuoteCell(v: View) : RecyclerView.ViewHolder(v) {
     fun bindQuote(quote: Quote){
         this.quote = quote
 
-        view.quoteTextView.text = quote.text
+        view.quoteTextView.text = quote.quote
         view.authorTextView.text = quote.author
     }
 }

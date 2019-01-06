@@ -21,7 +21,7 @@ class SingleQuoteView @JvmOverloads constructor(context: Context, attrs: Attribu
     }
 
     fun setQuote(quote: Quote){
-        quoteTextView.text = quote.text
+        quoteTextView.text = quote.quote
         authorTextView.text = quote.author
     }
 }

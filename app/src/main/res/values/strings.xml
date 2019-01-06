@@ -7,4 +7,6 @@
     <string name="title_live_quotes">Live</string>
 
     <string name="toolBarName">Best source of wisdom</string>
+
+    <string name="onRequestErrorMessage">You are already wisdom enough!</string>
 </resources>

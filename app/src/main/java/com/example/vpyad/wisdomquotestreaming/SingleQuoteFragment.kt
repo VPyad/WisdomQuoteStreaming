@@ -57,8 +57,7 @@ class SingleQuoteFragment : Fragment() {
                     hideProgress()
                 },
                 { error ->
-                    //showToast(R.string.onRequestErrorMessage)
-                    showToast(error.message.toString())
+                    showToast(R.string.onRequestErrorMessage)
                     hideProgress()
                 }
             )

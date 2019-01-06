@@ -9,4 +9,5 @@
     <string name="toolBarName">Best source of wisdom</string>
 
     <string name="onRequestErrorMessage">You are already wisdom enough!</string>
+    <string name="onSocketConnectionErrorMessage">Can not connect to server :(</string>
 </resources>

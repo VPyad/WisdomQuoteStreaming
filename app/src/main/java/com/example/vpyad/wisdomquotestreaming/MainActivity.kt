@@ -1,26 +1,27 @@
 package com.example.vpyad.wisdomquotestreaming
 
-import android.app.Fragment
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
+import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentStatePagerAdapter
 import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
     private val manager = supportFragmentManager
+    private  val singleQuoteFragment = SingleQuoteFragment()
+    private val streamQuoteFragment = QuoteStreamFragment()
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_single_quote -> {
-                val singleQuoteFragment = SingleQuoteFragment()
-                replaceFragment(singleQuoteFragment)
+                swithFragment(singleQuoteFragment, streamQuoteFragment)
 
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_live -> {
-                val streamQuoteFragment = QuoteStreamFragment()
-                replaceFragment(streamQuoteFragment)
+                swithFragment(streamQuoteFragment, singleQuoteFragment)
 
                 return@OnNavigationItemSelectedListener true
             }
@@ -39,11 +40,19 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationView.selectedItemId = R.id.navigation_single_quote
     }
 
-    private fun replaceFragment(fragment: android.support.v4.app.Fragment){
+    private fun swithFragment(fragmentShow: android.support.v4.app.Fragment, fragmentHide: Fragment) {
         val transaction = manager.beginTransaction()
 
-        transaction.replace(R.id.fragment_container, fragment)
-        transaction.addToBackStack(null)
+        if (fragmentShow.isAdded) {
+            transaction.show(fragmentShow)
+        }
+        else {
+            transaction.add(R.id.fragment_container, fragmentShow)
+        }
+
+        if (fragmentHide.isAdded) {
+            transaction.hide(fragmentHide)
+        }
 
         transaction.commit()
     }

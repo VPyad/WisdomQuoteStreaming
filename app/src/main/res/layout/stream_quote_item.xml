@@ -18,7 +18,7 @@
               android:fontFamily="@font/roboto"
               android:textAlignment="center"
               android:textColor="@color/mainTextForeground" android:textSize="25sp"
-              android:text="fuuuuuuck"/>
+              android:text=""/>
 
     <TextView android:id="@+id/authorTextView"
               android:layout_width="match_parent"
@@ -29,5 +29,5 @@
               android:textStyle="italic"
               android:gravity="right"
               android:textColor="@color/mainTextForeground" android:textSize="26sp"
-              android:text="this"/>
+              android:text=""/>
 </LinearLayout>

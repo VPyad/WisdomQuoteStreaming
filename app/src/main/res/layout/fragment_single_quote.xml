@@ -25,5 +25,6 @@
             android:id="@+id/progressBar"
             android:layout_width="45pt"
             android:layout_height="45pt"
-            android:layout_centerInParent="true" android:visibility="gone"/>
+            android:layout_centerInParent="true" android:visibility="gone" android:layout_alignParentTop="true"
+            android:layout_marginTop="215dp"/>
 </RelativeLayout>

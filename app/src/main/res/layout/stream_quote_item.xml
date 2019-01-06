@@ -5,6 +5,8 @@
               android:background="@color/streamRecyclerViewCell"
               android:orientation="vertical">
 
+    <View android:layout_width="match_parent" android:layout_height="3dp" android:background="@color/colorPrimary"/>
+
     <ImageView android:layout_width="match_parent"
                android:layout_height="30pt"
                android:id="@+id/quoteImageView"/>
@@ -30,4 +32,6 @@
               android:gravity="right"
               android:textColor="@color/mainTextForeground" android:textSize="26sp"
               android:text=""/>
+
+    <View android:layout_width="match_parent" android:layout_height="3dp" android:background="@color/colorPrimary"/>
 </LinearLayout>

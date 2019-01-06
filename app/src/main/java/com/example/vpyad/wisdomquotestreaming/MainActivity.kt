@@ -16,12 +16,12 @@ class MainActivity : AppCompatActivity() {
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_single_quote -> {
-                swithFragment(singleQuoteFragment, streamQuoteFragment)
+                swithcFragment(singleQuoteFragment, streamQuoteFragment)
 
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_live -> {
-                swithFragment(streamQuoteFragment, singleQuoteFragment)
+                swithcFragment(streamQuoteFragment, singleQuoteFragment)
 
                 return@OnNavigationItemSelectedListener true
             }
@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationView.selectedItemId = R.id.navigation_single_quote
     }
 
-    private fun swithFragment(fragmentShow: android.support.v4.app.Fragment, fragmentHide: Fragment) {
+    private fun swithcFragment(fragmentShow: android.support.v4.app.Fragment, fragmentHide: Fragment) {
         val transaction = manager.beginTransaction()
 
         if (fragmentShow.isAdded) {

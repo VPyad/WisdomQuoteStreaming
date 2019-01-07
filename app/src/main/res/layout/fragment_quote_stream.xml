@@ -12,4 +12,13 @@
             android:id="@+id/streamRecyclerView"
             android:scrollbars="vertical"/>
 
+    <android.support.design.widget.FloatingActionButton android:id="@+id/upFAB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|bottom"
+            android:layout_marginBottom="30dp"
+            android:layout_marginRight="30dp"
+            android:src="@drawable/ic_arrow_upward_black_24dp"
+            android:visibility="gone"/>
+
 </FrameLayout>

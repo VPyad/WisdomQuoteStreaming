@@ -21,8 +21,12 @@ import android.widget.Toast
 
 
 class QuoteStreamFragment() : Fragment() {
+    private var quotesList: ArrayList<Quote> = ArrayList()
     private val webSocket = RxWebsocket.Builder()
         .build(QuoteApiService.WS_BASE_URL + QuoteApiService.STREAM_ENDPOINT)
+
+    private lateinit var streamQuoteRecyclerAdapter: StreamQuoteRecyclerAdapter
+    private lateinit var linearLayoutManager: LinearLayoutManager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,14 +37,18 @@ class QuoteStreamFragment() : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        var quotes = getQuotes()
-
         connectToSocket()
 
         val context: Context = this.context ?: return
 
-        streamRecyclerView.layoutManager = LinearLayoutManager(context)
-        streamRecyclerView.adapter = StreamQuoteRecyclerAdapter(quotes, context)
+        streamQuoteRecyclerAdapter = StreamQuoteRecyclerAdapter(quotesList, context)
+        linearLayoutManager = LinearLayoutManager(context)
+
+        streamRecyclerView.layoutManager = linearLayoutManager
+        streamRecyclerView.adapter = streamQuoteRecyclerAdapter
+
+        upFAB.setOnClickListener(upButtonClickListener)
+
         super.onViewCreated(view, savedInstanceState)
     }
 
@@ -49,16 +57,12 @@ class QuoteStreamFragment() : Fragment() {
         super.onDestroyView()
     }
 
-    private fun getQuotes(): ArrayList<Quote>{
-        val quotes: ArrayList<Quote> = ArrayList()
-
-        quotes.add(Quote("The only people who never fail are those who never try.","Ilka Chase",""))
-        quotes.add(Quote("Failure is just another way to learn how to do something right.","Marian Wright Edelman",""))
-        quotes.add(Quote("I failed my way to success.","Thomas Edison",""))
-        quotes.add(Quote("Every failure brings with it the seed of an equivalent success.","Napoleon Hill",""))
-        quotes.add(Quote("Every failure brings with it the seed of an equivalent success.","Napoleon Hill",""))
-
-        return quotes
+    private val upButtonClickListener = View.OnClickListener { view ->
+        when (view.id) {
+            R.id.upFAB -> {
+                linearLayoutManager.scrollToPosition(0)
+            }
+        }
     }
 
     private fun connectToSocket() {
@@ -67,7 +71,18 @@ class QuoteStreamFragment() : Fragment() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 { onSuccess ->
-                    Log.d("WS_DATA", onSuccess.data())
+                    //Log.d("WS_DATA", onSuccess.data())
+
+                    if (onSuccess.data() != null) {
+                        val quote = Quote.parse(onSuccess.data()!!)
+
+                        quotesList.add(0, quote)
+                        streamQuoteRecyclerAdapter.notifyItemInserted(0)
+
+                        if (quotesList.size >= 3) {
+                            upFAB.visibility = View.VISIBLE
+                        }
+                    }
                 },
                 { onError ->
                     showToast(R.string.onSocketConnectionErrorMessage)
